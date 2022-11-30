@@ -3,65 +3,93 @@ package com.example.mvvm_livedata_room.plantlist
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mvvm_livedata_room.database.Plant
 import com.example.mvvm_livedata_room.R
+import com.example.mvvm_livedata_room.databinding.ListItemPlantBinding
 
-class PlantListAdapter: RecyclerView.Adapter<PlantListAdapter.ItemViewHolder>() {
-    var data =  listOf<Plant>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+class PlantListAdapter(val clickListener: PlantClickListener): ListAdapter<Plant, PlantListAdapter.ItemViewHolder>(PlantDiffCallback()) {
+//    var data =  listOf<Plant>()
+//        set(value) {
+//            field = value
+//            notifyDataSetChanged()
+//        }
 
-        class ItemViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-            val nameView= view.findViewById<TextView>(R.id.plant_name)
-            val plantImage= view.findViewById<ImageView>(R.id.imageView)
-            private var plantid: Int = 0
-            init {
-                view.setOnClickListener {
-                    val action =
-                        PlantListFragmentDirections.actionPlantListFragmentToPlantDetailFragment(
-                            plantid
-                        )
-                    Navigation.findNavController(view).navigate(action)
+        class ItemViewHolder(val binding: ListItemPlantBinding) : RecyclerView.ViewHolder(binding.root) {
+            //val nameView= view.findViewById<TextView>(R.id.plant_name)
+            //val plantImage= view.findViewById<ImageView>(R.id.imageView)
+            private var plantid: Long = 0
+//            init {
+//                view.setOnClickListener {
+//                    val action =
+//                        PlantListFragmentDirections.actionPlantListFragmentToPlantDetailFragment(
+//                            plantid
+//                        )
+//                    Navigation.findNavController(view).navigate(action)
+//                }
+//            }
+            companion object{
+                fun from(parent: ViewGroup): ItemViewHolder{
+                    val binding = ListItemPlantBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                    return ItemViewHolder(binding)
                 }
             }
 
-                fun bind(plant: Plant) {
+                fun bind(plant: Plant, clickListener: PlantClickListener) {
                     plantid = plant.id
-                    nameView.text = plant.plantName
-//                plantImage.setImageResource(when (plant.id % 10) {
-//                    0 -> R.drawable.plant_0
-//                    1 -> R.drawable.plant_1
-//                    2 -> R.drawable.plant_2
-//                    3 -> R.drawable.plant_3
-//                    4 -> R.drawable.plant_4
-//                    5 -> R.drawable.plant_5
-//                    6 -> R.drawable.plant_6
-//                    7 -> R.drawable.plant_7
-//                    8 -> R.drawable.plant_8
-//                    9 -> R.drawable.plant_9
-//                    else -> R.drawable.plant_0
-//                })
+                    //nameView.text = plant.plantName
+                    binding.plant = plant
+                    binding.clickListener = clickListener
+
+
 
             }
 
         }
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlantListAdapter.ItemViewHolder {
-            val layout = LayoutInflater.from(parent.context).inflate(R.layout.list_item_plant, parent,false)
-            return PlantListAdapter.ItemViewHolder(layout)
+//            val layout = LayoutInflater.from(parent.context).inflate(R.layout.list_item_plant, parent,false)
+//            return PlantListAdapter.ItemViewHolder(layout)
+
+            return ItemViewHolder.from(parent)
         }
 
         override fun onBindViewHolder(holder: PlantListAdapter.ItemViewHolder, position: Int) {
-            val plant = data[position]
-            holder.bind(plant)
+            val plant = getItem(position)
+            //holder.bind(plant)
+            holder.bind(plant, clickListener)
 
         }
 
-        override fun getItemCount() =  data.size
 
 }
+
+class PlantDiffCallback: DiffUtil.ItemCallback<Plant>(){
+    override fun areItemsTheSame(oldItem: Plant, newItem: Plant): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: Plant, newItem: Plant): Boolean {
+        return oldItem == newItem
+    }
+
+}
+
+class PlantClickListener(val clickListener: (plantID: Long) -> Unit){
+    fun onClick(plant: Plant) = clickListener(plant.id)
+}
+
+
+
+
+
+
+
+
+
+

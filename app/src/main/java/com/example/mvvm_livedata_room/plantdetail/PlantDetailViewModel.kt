@@ -9,7 +9,7 @@ import com.example.mvvm_livedata_room.database.Plant
 import com.example.mvvm_livedata_room.database.PlantDAO
 import com.example.mvvm_livedata_room.database.PlantDatabase
 
-class PlantDetailViewModel(plantKey: Int, application: Application) : AndroidViewModel(application) {
+class PlantDetailViewModel(plantKey: Long, application: Application) : AndroidViewModel(application) {
         //we extend from AndroidViewModel instead of ViewModel because it's the version that can reference the application context to instantiate the database in a lifecycle-aware way.
 
 
@@ -26,7 +26,7 @@ class PlantDetailViewModel(plantKey: Int, application: Application) : AndroidVie
         }
     }
 
-    class PlantDetailViewModelFactory(private val plantKey: Int, private val application: Application): ViewModelProvider.Factory {
+    class PlantDetailViewModelFactory(private val plantKey: Long, private val application: Application): ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(PlantDetailViewModel::class.java)) {
                 return PlantDetailViewModel(plantKey, application) as T

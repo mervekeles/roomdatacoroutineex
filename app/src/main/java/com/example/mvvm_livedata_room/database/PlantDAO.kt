@@ -20,5 +20,5 @@ import androidx.room.Query
         suspend fun deleteAll()
 
         @Query("SELECT * from plant WHERE id = :key")
-        fun get(key: Int): LiveData<Plant>
+        fun get(key: Long): LiveData<Plant>
     }

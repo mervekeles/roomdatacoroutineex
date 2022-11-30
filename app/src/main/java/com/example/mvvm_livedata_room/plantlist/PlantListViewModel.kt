@@ -14,6 +14,11 @@ import kotlinx.coroutines.launch
 class PlantListViewModel(val plantDAO: PlantDAO, application: Application) : AndroidViewModel(application) {
     var app = application
 
+    private val _navigateToPlantDetail = MutableLiveData<Long?>()
+
+    val navigateToPlantDetail
+        get() =  _navigateToPlantDetail
+
     fun populateData() {
         viewModelScope.launch {
             plantDAO.deleteAll()
@@ -38,6 +43,15 @@ class PlantListViewModel(val plantDAO: PlantDAO, application: Application) : And
     fun fetchPlantsFromDB(): LiveData<List<Plant>> {
         return plantDAO.getAll()
     }
+
+    fun onPlantClicked(id: Long){
+        _navigateToPlantDetail.value = id
+    }
+
+    fun doneNavigating(){
+        _navigateToPlantDetail.value = null
+    }
+
 }
 
 

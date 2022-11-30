@@ -7,6 +7,6 @@ import com.google.gson.annotations.SerializedName
 
 @Entity
 data class Plant(
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0L,
     @SerializedName("plant_common_name") @ColumnInfo(name = "plant_name") val plantName: String?,
     @SerializedName("family_name")@ColumnInfo(name = "plant_family") val plantFamily: String?)
