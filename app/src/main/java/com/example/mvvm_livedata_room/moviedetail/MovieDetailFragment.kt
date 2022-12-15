@@ -1,4 +1,5 @@
-package com.example.mvvm_livedata_room.plantdetail
+
+package com.example.mvvm_livedata_room.moviedetail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,27 +10,24 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.mvvm_livedata_room.R
-import com.example.mvvm_livedata_room.databinding.FragmentPlantDetailBinding
-import com.example.mvvm_livedata_room.databinding.FragmentPlantListBinding
+import com.example.mvvm_livedata_room.databinding.FragmentMovieDetailBinding
 
-class PlantDetailFragment: Fragment() {
+class MovieDetailFragment: Fragment() {
 
-    val args: PlantDetailFragmentArgs by navArgs()
+    val args: MovieDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val  binding : FragmentPlantDetailBinding
+        val  binding : FragmentMovieDetailBinding
                 = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_plant_detail, container, false)
+            inflater, R.layout.fragment_movie_detail, container, false)
         val application = requireNotNull(this.activity).application
 
-
-
-        val plantDetailViewModel: PlantDetailViewModel by viewModels(){ PlantDetailViewModelFactory(args.plantid, application)}
-        binding.vm = plantDetailViewModel
+        val movieDetailViewModel: MovieDetailViewModel by viewModels(){ MovieDetailViewModelFactory(args.id, application) }
+       binding.vm = movieDetailViewModel
         binding.lifecycleOwner = this
         return binding.root
     }

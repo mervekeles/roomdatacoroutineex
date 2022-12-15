@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/plantListFragment">
-
+    app:startDestination="@id/mainFragment">
     <fragment
-        android:id="@+id/plantListFragment"
-        android:name="com.example.mvvm_livedata_room.plantlist.PlantListFragment"
-        android:label="PlantListFragment" >
+        android:id="@+id/movieListFragment"
+        android:name="com.example.mvvm_livedata_room.movielist.MovieListFragment"
+        android:label="MovieListFragment" >
         <action
-            android:id="@+id/action_plantListFragment_to_plantDetailFragment"
-            app:destination="@id/plantDetailFragment" />
+            android:id="@+id/action_movieListFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/plantDetailFragment"
-        android:name="com.example.mvvm_livedata_room.plantdetail.PlantDetailFragment"
-        android:label="PlantDetailFragment" >
+        android:id="@+id/movieDetailFragment"
+        android:name="com.example.mvvm_livedata_room.moviedetail.MovieDetailFragment"
+        android:label="MovieDetailFragment" >
         <argument
-            android:name="plantid"
+            android:name="id"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.mvvm_livedata_room.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/activity_main">
+        <action
+            android:id="@+id/action_mainFragment_to_movieListFragment"
+            app:destination="@id/movieListFragment" />
     </fragment>
 </navigation>
