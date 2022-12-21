@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "326695357306",
+    "project_id": "moviesexample-project",
+    "storage_bucket": "moviesexample-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326695357306:android:feabdd4331f910cb1ba4c3",
+        "android_client_info": {
+          "package_name": "com.example.mvvm_livedata_room"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "326695357306-vtq81ghqar6r64ph2imlvfib4a9tlop4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRDenAfEvqjLT1RDJJe1DNSsE8DBe13Dk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "326695357306-vtq81ghqar6r64ph2imlvfib4a9tlop4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

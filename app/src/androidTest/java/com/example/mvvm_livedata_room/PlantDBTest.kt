@@ -3,30 +3,29 @@ package com.example.mvvm_livedata_room
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.example.mvvm_livedata_room.database.Plant
-import com.example.mvvm_livedata_room.database.PlantDAO
-import com.example.mvvm_livedata_room.database.PlantDatabase
+import com.example.mvvm_livedata_room.database.MovieDAO
+import com.example.mvvm_livedata_room.database.MovieDatabase
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.IOException
 @RunWith(AndroidJUnit4::class)
-class PlantDBTest {
+class MovieDBTest {
 
-        private lateinit var plantDao: PlantDAO
-        private lateinit var db: PlantDatabase
+        private lateinit var MovieDao: MovieDAO
+        private lateinit var db: MovieDatabase
 
         @Before
         fun createDb() {
             val context = InstrumentationRegistry.getInstrumentation().targetContext
             // Using an in-memory database because the information stored here disappears when the
             // process is killed.
-            db = Room.inMemoryDatabaseBuilder(context, PlantDatabase::class.java)
+            db = Room.inMemoryDatabaseBuilder(context, MovieDatabase::class.java)
                 // Allowing main thread queries, just for testing.
                 .allowMainThreadQueries()
                 .build()
-            plantDao = db.plantDao()
+            MovieDao = db.MovieDao()
         }
 
         @After
@@ -38,9 +37,9 @@ class PlantDBTest {
         @Test
         @Throws(Exception::class)
         fun insertAndGetNight() {
-//           val plant = Plant( "Agavaceae", "Agave")
-//           plantDao.ins
-//            val tonight = plantDao.get
+//           val Movie = Movie( "Agavaceae", "Agave")
+//           MovieDao.ins
+//            val tonight = MovieDao.get
 //            assertEquals(tonight?.sleepQuality, -1)
         }
 }

@@ -6,7 +6,7 @@
     <data>
 <variable
     name="vm"
-    type="com.example.mvvm_livedata_room.plantdetail.PlantDetailViewModel" />
+    type="com.example.mvvm_livedata_room.moviedetail.MovieDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="@{vm.plant.plantName}"
+            android:text="@{vm.movie.title}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="64dp"
-            android:text="@{vm.plant.plantFamily}"
+            android:text="@{vm.movie.overview}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/name" />
     </androidx.constraintlayout.widget.ConstraintLayout>
