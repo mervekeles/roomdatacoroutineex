@@ -2,18 +2,16 @@ package com.example.mvvm_livedata_room
 
 import android.util.Log
 import android.view.View
-import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.model.GlideUrl
-import com.bumptech.glide.load.model.LazyHeaders
 import com.bumptech.glide.request.RequestOptions
 import com.example.mvvm_livedata_room.movielist.MovieApiStatus
 import com.example.mvvm_livedata_room.movielist.MovieListAdapter
 import com.example.mvvm_livedata_room.network.Movie
+import com.google.android.material.textfield.TextInputLayout
 
 
 private const val BASE_URL =
@@ -62,4 +60,9 @@ fun bindStatus(statusImageView: ImageView,
         else -> {statusImageView.visibility = View.GONE}
     }
 
+}
+
+@BindingAdapter("app:errorText")
+fun setErrorMessage(view: TextInputLayout, errorMessage: String?) {
+    view.error = errorMessage
 }

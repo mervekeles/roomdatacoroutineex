@@ -28,5 +28,27 @@
         <action
             android:id="@+id/action_mainFragment_to_movieListFragment"
             app:destination="@id/movieListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_emailPasswordFragment"
+            app:destination="@id/emailPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createAccountFragment"
+        android:name="com.example.mvvm_livedata_room.authentication.CreateAccountFragment"
+        android:label="CreateAccountFragment" >
+        <action
+            android:id="@+id/action_createAccountFragment_to_movieListFragment"
+            app:destination="@id/movieListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/emailPasswordFragment"
+        android:name="com.example.mvvm_livedata_room.authentication.EmailPasswordFragment"
+        android:label="EmailPasswordFragment" >
+        <action
+            android:id="@+id/action_emailPasswordFragment_to_createAccountFragment"
+            app:destination="@id/createAccountFragment" />
+        <action
+            android:id="@+id/action_emailPasswordFragment_to_movieListFragment"
+            app:destination="@id/movieListFragment" />
     </fragment>
 </navigation>

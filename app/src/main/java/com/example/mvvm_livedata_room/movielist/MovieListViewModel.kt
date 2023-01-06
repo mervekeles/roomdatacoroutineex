@@ -2,15 +2,21 @@ package com.example.mvvm_livedata_room.movielist
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.bumptech.glide.Glide.init
+import com.example.mvvm_livedata_room.database.getDatabase
 import com.example.mvvm_livedata_room.network.Movie
 import com.example.mvvm_livedata_room.network.MoviesApi
+import com.example.mvvm_livedata_room.repository.MoviesRepository
 import kotlinx.coroutines.launch
+import java.io.IOException
 
 
 enum class MovieApiStatus { LOADING, ERROR, DONE }
 
 class MovieListViewModel(application: Application) : AndroidViewModel(application) {
 
+    private val moviesRepository = MoviesRepository(getDatabase(application))
+    val movies = moviesRepository.movies
     // The internal MutableLiveData String that stores the most recent response
     private val _response = MutableLiveData<String>()
 
@@ -22,9 +28,9 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
     val status: LiveData<MovieApiStatus>
         get() = _status
 
-    private val _movies = MutableLiveData<List<Movie>>()
-    val movies :LiveData<List<Movie>>
-        get() = _movies
+//    private val _movies = MutableLiveData<List<Movie>>()
+//    val movies :LiveData<List<Movie>>
+//        get() = _movies
 
     private val _navigateToMovieDetail = MutableLiveData<Int?>()
 
@@ -51,7 +57,7 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
 */
 
         //coroutine version
-        viewModelScope.launch {
+       /* viewModelScope.launch {
             _status.value = MovieApiStatus.LOADING
             try {
                 val response = MoviesApi.retrofitService.getMostPopular()
@@ -64,6 +70,18 @@ class MovieListViewModel(application: Application) : AndroidViewModel(applicatio
                 _response.value = "Failure: ${e.message}"
                 _status.value = MovieApiStatus.ERROR
                 _movies.value = ArrayList()
+            }
+        }*/
+        viewModelScope.launch {
+            //_status.value = MovieApiStatus.LOADING
+            try {
+            moviesRepository.refreshMovies()
+                _status.value = MovieApiStatus.DONE
+            }
+            catch (networkError: IOException){
+                if(movies.value.isNullOrEmpty()){
+                    _status.value = MovieApiStatus.ERROR
+                }
             }
         }
     }
